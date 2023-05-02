@@ -1,0 +1,13 @@
+{
+  "extends": ["react-app", "eslint:recommended", "prettier"],
+  "rules": {
+    "no-var": "error",
+    "no-multiple-empty-lines": "error",
+    "no-console": ["warn", { "allow": ["warn", "error", "info"] }],
+    "eqeqeq": "error",
+    "dot-notation": "error",
+    "no-unused-vars": "warn",
+    "no-empty": ["error", { "allowEmptyCatch": true }]
+  },
+  "ignorePatterns": ["src/components/.keep", "src/pages/.keep"]
+}

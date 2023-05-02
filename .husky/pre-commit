@@ -1,0 +1,17 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+echo -e "\n${BLUE}husky pre-commit starting.${NORMAL}\n"
+
+staged=$(git diff --cached --name-only --diff-filter=d)
+
+if [ -n "$staged" ]; then 
+  npx prettier --cache --list-different --write $staged
+  git add $staged
+  echo -e "\nprettier formatting done!\n"
+  echo -e "\n${BLUE}husky pre-commit terminated${NORMAL}\n"
+else
+  echo -e "\n${BLUE}husky pre-commit terminated${NORMAL}\n"
+fi
+
+npm run format
