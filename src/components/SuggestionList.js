@@ -4,7 +4,7 @@ const SuggestionList = ({ suggestions, focusedIndex, setFocusedIndex }) => {
   const suggestionListRef = useRef(null);
 
   return (
-    <div ref={suggestionListRef}>
+    <ul ref={suggestionListRef}>
       {suggestions.map((suggestion, index) => (
         <li
           key={index}
@@ -14,7 +14,7 @@ const SuggestionList = ({ suggestions, focusedIndex, setFocusedIndex }) => {
           {suggestion.name}
         </li>
       ))}
-    </div>
+    </ul>
   );
 };
 
