@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { apiClient } from '../apis/apiClient';
 
-const useFetch = (keyword) => {
+const useKeywordSuggestion = (keyword) => {
   const [suggestions, setSuggestions] = useState([]);
 
   const fetchSuggestions = useCallback(async () => {
@@ -24,4 +24,4 @@ const useFetch = (keyword) => {
   return [suggestions];
 };
 
-export default useFetch;
+export default useKeywordSuggestion;
