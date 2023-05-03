@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import useFetch from '../hooks/useFetch';
+import useKeywordSuggestion from '../hooks/useKeywordSuggestion';
 import useInputChange from '../hooks/useInputChange';
 import useKeyboard from '../hooks/useKeyboard';
 import SearchBarInput from '../components/SearchBarInput';
@@ -8,7 +8,7 @@ import SuggestionList from '../components/SuggestionList';
 const SearchBar = () => {
   const [focusedIndex, setFocusedIndex] = useState(-1);
   const [keyword, handleInputChange, setKeyword] = useInputChange();
-  const [suggestions] = useFetch(keyword);
+  const [suggestions] = useKeywordSuggestion(keyword);
 
   const handleKeyDown = useKeyboard(
     suggestions,
