@@ -1,5 +1,5 @@
 import axios from 'axios';
-
+// TODO: extract to a separate file
 class Cache {
   #dataMap = {};
   #expireTimeInSec;
@@ -63,6 +63,7 @@ class ApiClient {
     config.data = JSON.stringify(data);
 
     try {
+      console.info('calling api');
       const response = await axios.request(config);
       return response;
     } catch (e) {
