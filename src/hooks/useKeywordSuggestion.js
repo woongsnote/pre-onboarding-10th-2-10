@@ -4,10 +4,10 @@ import { apiClient } from '../apis/apiClient';
 const useKeywordSuggestion = (keyword) => {
   const [suggestions, setSuggestions] = useState([]);
 
-  const fetchSuggestions = useCallback(async () => {
+  const fetchSuggestions = useCallback(async (name) => {
     try {
-      if (keyword) {
-        const response = await apiClient.getKeyword(keyword);
+      if (name) {
+        const response = await apiClient.getKeyword(name);
         setSuggestions(response.data);
       } else {
         setSuggestions([]);
@@ -15,11 +15,11 @@ const useKeywordSuggestion = (keyword) => {
     } catch (error) {
       console.error(error);
     }
-  }, [keyword]);
+  }, []);
 
   useEffect(() => {
-    fetchSuggestions();
-  }, [fetchSuggestions]);
+    fetchSuggestions(keyword);
+  }, [keyword]);
 
   return [suggestions];
 };
