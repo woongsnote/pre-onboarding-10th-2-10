@@ -8,7 +8,19 @@ class Cache {
   }
 
   set(key, data) {
-    this.#dataMap[key] = data;
+    const cacheData = new Data(data);
+    this.#dataMap[key] = cacheData;
+  }
+}
+
+class Data {
+  #data;
+  constructor(data) {
+    this.#data = data;
+  }
+
+  get data() {
+    return this.#data;
   }
 }
 
@@ -46,7 +58,7 @@ class ApiClient {
   async #get(path, cacheOptions) {
     const cachedData = this.#cache.get(cacheOptions.key);
     if (cachedData) {
-      return cachedData.data;
+      return cachedData.data.data;
     } else {
       const data = await this.#request('GET', path);
       this.#cache.set(cacheOptions.key, data);
