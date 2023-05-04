@@ -2,25 +2,41 @@ import axios from 'axios';
 
 class Cache {
   #dataMap = {};
+  #expireTimeInSec;
+
+  constructor(expireTimeInSec) {
+    this.#expireTimeInSec = expireTimeInSec || 0;
+  }
 
   get(key) {
     return this.#dataMap[key];
   }
 
-  set(key, data) {
-    const cacheData = new Data(data);
+  set(key, data, expireTimeInSec) {
+    const cacheData = new Data(data, expireTimeInSec || this.#expireTimeInSec);
     this.#dataMap[key] = cacheData;
   }
 }
 
 class Data {
   #data;
-  constructor(data) {
+  #expireTimeInSec;
+  #createdAt;
+
+  constructor(data, expireTimeInSec) {
     this.#data = data;
+    this.#expireTimeInSec = expireTimeInSec;
+    this.#createdAt = new Date();
   }
 
   get data() {
     return this.#data;
+  }
+
+  get isExpired() {
+    const now = new Date();
+    const differenceSec = (now.getTime() - this.#createdAt.getTime()) / 1000;
+    return differenceSec >= this.#expireTimeInSec;
   }
 }
 
@@ -57,11 +73,12 @@ class ApiClient {
 
   async #get(path, cacheOptions) {
     const cachedData = this.#cache.get(cacheOptions.key);
-    if (cachedData) {
+
+    if (cachedData && !cachedData.isExpired) {
       return cachedData.data.data;
     } else {
       const data = await this.#request('GET', path);
-      this.#cache.set(cacheOptions.key, data);
+      this.#cache.set(cacheOptions.key, data, cacheOptions.expireTimeInSec);
       return data;
     }
   }
@@ -69,6 +86,7 @@ class ApiClient {
   async getKeyword(keyword) {
     return await this.#get(`?name=${keyword}`, {
       key: ['GET_KEYWORD', keyword],
+      expireTimeInSec: 5,
     });
   }
 }
