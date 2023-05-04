@@ -1,10 +1,24 @@
 import axios from 'axios';
 
+class Cache {
+  #dataMap = {};
+
+  get(key) {
+    return this.#dataMap[key];
+  }
+
+  set(key, data) {
+    this.#dataMap[key] = data;
+  }
+}
+
 class ApiClient {
   #options = {};
+  #cache;
 
   constructor(options) {
     this.#options.HOST = options.HOST.replace(/(.*)(\/$)/, '$1');
+    this.#cache = new Cache();
   }
 
   async #request(method, path, data) {
@@ -29,15 +43,24 @@ class ApiClient {
     }
   }
 
-  async #get(path) {
-    return await this.#request('GET', path);
+  async #get(path, cacheOptions) {
+    const cachedData = this.#cache.get(cacheOptions.key);
+    if (cachedData) {
+      return cachedData.data;
+    } else {
+      const data = await this.#request('GET', path);
+      this.#cache.set(cacheOptions.key, data);
+      return data;
+    }
   }
 
   async getKeyword(keyword) {
-    return await this.#get(`?name=${keyword}`);
+    return await this.#get(`?name=${keyword}`, {
+      key: ['GET_KEYWORD', keyword],
+    });
   }
 }
 
 export const apiClient = new ApiClient({
-  HOST: 'https://api.clinicaltrialskorea.com/api/v1/search-conditions/',
+  HOST: '/api/v1/search-conditions/',
 });
