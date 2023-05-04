@@ -1,21 +1,25 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { apiClient } from '../apis/apiClient';
+import { debounce } from '../utils/debounce';
 
 const useKeywordSuggestion = (keyword) => {
   const [suggestions, setSuggestions] = useState([]);
 
-  const fetchSuggestions = useCallback(async (name) => {
-    try {
-      if (name) {
-        const response = await apiClient.getKeyword(name);
-        setSuggestions(response.data);
-      } else {
-        setSuggestions([]);
+  const fetchSuggestions = useCallback(
+    debounce(async (name) => {
+      try {
+        if (name) {
+          const response = await apiClient.getKeyword(name);
+          setSuggestions(response.data);
+        } else {
+          setSuggestions([]);
+        }
+      } catch (error) {
+        console.error(error);
       }
-    } catch (error) {
-      console.error(error);
-    }
-  }, []);
+    }, 500),
+    []
+  );
 
   useEffect(() => {
     fetchSuggestions(keyword);
