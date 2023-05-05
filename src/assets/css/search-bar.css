@@ -1,0 +1,36 @@
+.search-form {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 500px;
+  overflow: hidden;
+  margin-bottom: 10px;
+  border: none;
+  border-radius: var(--input-radius);
+  box-shadow: var(--basic-box-shadow);
+}
+
+.search-form,
+.search-form > * {
+  background-color: var(--white);
+}
+
+.search-input {
+  width: 90%;
+  padding-left: 20px;
+  font-size: 1rem;
+  border: none;
+  outline: none;
+}
+
+.search-button {
+  border: none;
+  cursor: pointer;
+  height: 54px;
+  width: 56px;
+}
+
+.bi-search {
+  color: rgba(0, 0, 0, 0.8);
+  font-size: 1rem;
+}
