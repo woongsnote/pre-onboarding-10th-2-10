@@ -1,4 +1,3 @@
-import React from 'react';
 import SearchBar from './pages/SearchBar';
 import './assets/css/styles.css';
 import Title from './components/Title';

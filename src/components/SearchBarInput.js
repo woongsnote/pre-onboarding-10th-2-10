@@ -1,11 +1,9 @@
-import React from 'react';
-
 const SearchBarInput = ({ keyword, handleInputChange, handleKeyDown }) => {
   return (
     <div className="search-form">
       <input
         className="search-input"
-        type="text"
+        type="search"
         value={keyword}
         onChange={handleInputChange}
         onKeyDown={handleKeyDown}
