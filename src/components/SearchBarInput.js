@@ -1,4 +1,5 @@
 import React from 'react';
+import { PLACEHOLDER_TEXT } from '../constants';
 
 const SearchBarInput = ({ keyword, handleInputChange, handleKeyDown }) => {
   return (
@@ -7,7 +8,7 @@ const SearchBarInput = ({ keyword, handleInputChange, handleKeyDown }) => {
       value={keyword}
       onChange={handleInputChange}
       onKeyDown={handleKeyDown}
-      placeholder="search"
+      placeholder={PLACEHOLDER_TEXT}
     />
   );
 };
