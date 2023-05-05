@@ -38,19 +38,11 @@
 
 .suggestion--focused {
   position: relative;
-  background-color: var(--focused-color-100);
 }
 
-.suggestion--focused::before {
-  position: absolute;
-  content: '';
-  left: 0;
-  top: 0;
-  height: 100%;
-  width: 3px;
-  border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px;
-  background-color: var(--blue-400);
+.suggestion--focused,
+.suggestion-item:hover {
+  background-color: var(--focused-color-100);
 }
 
 .suggestion_no-result {
