@@ -21,8 +21,14 @@
   color: var(--subtitle-color-100);
 }
 
-.suggestion-list > li {
+.suggestion-item {
+  display: flex;
   padding: 10px 20px;
+}
+
+.suggestion-item > .bi-search {
+  margin-right: 12px;
+  color: rgba(0, 0, 0, 0.6);
 }
 
 .suggestion--focused {

@@ -15,12 +15,12 @@ const SuggestionList = ({
         suggestions.map((suggestion, index) => (
           <li
             key={index}
-            className={`${
-              index === focusedIndex ? `suggestion--focused` : `suggestion-item`
+            className={`suggestion-item ${
+              index === focusedIndex && `suggestion--focused`
             }`}
-            onClick={() => setFocusedIndex(index)}
           >
-            {suggestion.name}
+            <i className="bi bi-search" />
+            <div onClick={() => setFocusedIndex(index)}>{suggestion.name}</div>
           </li>
         ))
       ) : (
