@@ -25,15 +25,16 @@ const SearchBar = () => {
         handleKeyDown={handleKeyDown}
       />
 
-      {keyword && suggestions.length > 0 ? (
-        <SuggestionList
-          suggestions={suggestions}
-          focusedIndex={focusedIndex}
-          setFocusedIndex={setFocusedIndex}
-        />
-      ) : (
-        <div>검색어 없음</div>
-      )}
+      <div className="suggestion-list__container">
+        {keyword && (
+          <SuggestionList
+            keyword={keyword}
+            suggestions={suggestions}
+            focusedIndex={focusedIndex}
+            setFocusedIndex={setFocusedIndex}
+          />
+        )}
+      </div>
     </>
   );
 };

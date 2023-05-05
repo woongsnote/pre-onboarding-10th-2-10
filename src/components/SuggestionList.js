@@ -1,19 +1,31 @@
 import React, { useRef } from 'react';
 
-const SuggestionList = ({ suggestions, focusedIndex, setFocusedIndex }) => {
+const SuggestionList = ({
+  keyword,
+  suggestions,
+  focusedIndex,
+  setFocusedIndex,
+}) => {
   const suggestionListRef = useRef(null);
 
   return (
-    <ul ref={suggestionListRef}>
-      {suggestions.map((suggestion, index) => (
-        <li
-          key={index}
-          style={index === focusedIndex ? { backgroundColor: '#ccc' } : {}}
-          onClick={() => setFocusedIndex(index)}
-        >
-          {suggestion.name}
-        </li>
-      ))}
+    <ul className="suggestion-list" ref={suggestionListRef}>
+      <small>추천 검색어</small>
+      {keyword && suggestions.length > 0 ? (
+        suggestions.map((suggestion, index) => (
+          <li
+            key={index}
+            className={`${
+              index === focusedIndex ? `suggestion--focused` : `suggestion-item`
+            }`}
+            onClick={() => setFocusedIndex(index)}
+          >
+            {suggestion.name}
+          </li>
+        ))
+      ) : (
+        <div className="suggestion_no-result">검색어 없음</div>
+      )}
     </ul>
   );
 };
