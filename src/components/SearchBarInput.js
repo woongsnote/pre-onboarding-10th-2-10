@@ -4,7 +4,7 @@ import { PLACEHOLDER_TEXT } from '../constants';
 const SearchBarInput = ({ keyword, handleInputChange, handleKeyDown }) => {
   return (
     <input
-      type="text"
+      type="search"
       value={keyword}
       onChange={handleInputChange}
       onKeyDown={handleKeyDown}

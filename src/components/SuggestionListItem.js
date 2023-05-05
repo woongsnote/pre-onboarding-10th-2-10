@@ -7,12 +7,12 @@ const SuggestionListItem = ({
   focusedIndex,
   setFocusedIndex,
 }) => {
+  const isFocused = index === focusedIndex;
+
   return (
     <li
       key={suggestion.id}
-      style={
-        index === focusedIndex ? { color: '#007be9', fontWeight: 'bold' } : {}
-      }
+      style={isFocused ? { color: '#007be9', fontWeight: 'bold' } : {}}
       onClick={() => setFocusedIndex(index)}
     >
       <FaSearch />
