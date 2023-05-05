@@ -8,18 +8,22 @@ const useKeywordSuggestion = (keyword) => {
   const fetchSuggestions = useCallback(
     debounce(async (name) => {
       try {
-        if (name) {
-          const response = await apiClient.getKeyword(name);
-          setSuggestions(response.data);
-        } else {
-          setSuggestions([]);
-        }
+        const response = await apiClient.getKeyword(name);
+        setSuggestions(response.data);
       } catch (error) {
         console.error(error);
       }
-    }, 500),
+    }, 200),
     []
   );
+
+  useEffect(() => {
+    if (!keyword) {
+      setSuggestions([]);
+      return;
+    }
+    fetchSuggestions(keyword);
+  }, [keyword]);
 
   useEffect(() => {
     fetchSuggestions(keyword);

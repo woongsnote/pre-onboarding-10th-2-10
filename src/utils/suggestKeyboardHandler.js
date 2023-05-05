@@ -1,10 +1,12 @@
-const useKeyboard = (
+const suggestKeyboardHandler = (
   suggestions,
   focusedIndex,
   setFocusedIndex,
   setKeyword
 ) => {
   const handleKeyDown = (e) => {
+    if (!suggestions || suggestions.length === 0) return;
+
     if (e.key === 'ArrowDown') {
       e.preventDefault();
 
@@ -31,4 +33,4 @@ const useKeyboard = (
   return handleKeyDown;
 };
 
-export default useKeyboard;
+export default suggestKeyboardHandler;
